@@ -1,7 +1,7 @@
 package com.umlaut.patterntraining.state;
 
-import com.umlaut.patterntraining.dialog.RestaurantDialog;
 import com.umlaut.patterntraining.bill.IBill;
+import com.umlaut.patterntraining.dialog.RestaurantDialog;
 
 public class RestaurantContext {
     public final IState orderState = new OrderState(this);
@@ -14,8 +14,11 @@ public class RestaurantContext {
 
     public void enterRestaurant(RestaurantDialog dialog) {
         this.dialog = dialog;
-        state = orderState;
-        state.enterState();
+        dialog.getOrderDialog().addResultListener(orderState::goOn);
+        dialog.getEatDialog().addResultListener(eatState::goOn);
+        dialog.getPayDialog().addResultListener(payState::goOn);
+
+        setState(orderState);
     }
 
     public IBill getBill() {
@@ -32,5 +35,6 @@ public class RestaurantContext {
 
     public void setState(IState state) {
         this.state = state;
+        state.enterState();
     }
 }

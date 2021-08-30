@@ -11,11 +11,13 @@ public class PayState implements IState {
 
     @Override
     public void enterState() {
-        // State exercise: implement method
+        double bill = context.getBill().getTotal();
+        context.getDialog().getPayDialog().setBill(bill);
+        context.getDialog().showPayDialog();
     }
 
     @Override
     public void goOn(PropertyChangeEvent evt) {
-        // State exercise: implement method
+        System.exit(0);
     }
 }

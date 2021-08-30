@@ -1,5 +1,7 @@
 package com.umlaut.patterntraining.state;
 
+import com.umlaut.patterntraining.dialogresult.EatMore;
+
 import java.beans.PropertyChangeEvent;
 
 public class EatState implements IState {
@@ -11,11 +13,13 @@ public class EatState implements IState {
 
     @Override
     public void enterState() {
-        // State exercise: implement method
+        context.getDialog().showEatDialog();
     }
 
     @Override
     public void goOn(PropertyChangeEvent evt) {
-        // State exercise: implement method
+        EatMore eatMore = (EatMore) evt.getNewValue();
+        IState nextState = (eatMore == EatMore.YES) ? context.orderState : context.payState;
+        context.setState(nextState);
     }
 }

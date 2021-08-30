@@ -1,7 +1,7 @@
 package com.umlaut.patterntraining.restaurant;
 
 import com.umlaut.patterntraining.dialog.RestaurantDialog;
-import com.umlaut.patterntraining.state.RestaurantState;
+import com.umlaut.patterntraining.state.RestaurantContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +9,10 @@ import java.awt.*;
 public abstract class AbstractRestaurant {
     protected final JFrame mainFrame = new JFrame("Restaurant");
     protected final RestaurantDialog mainDialog = new RestaurantDialog();
-    protected final RestaurantState restaurantState = new RestaurantState();
+    protected final RestaurantContext restaurantContext = new RestaurantContext();
 
     public void enterRestaurant() {
-        // State exercise: use RestaurantContext instead
-        restaurantState.init(mainDialog);
+        restaurantContext.enterRestaurant(mainDialog);
         mainFrame.setVisible(true);
     }
 
