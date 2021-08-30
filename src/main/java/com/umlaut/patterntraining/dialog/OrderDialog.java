@@ -17,8 +17,11 @@ public class OrderDialog extends AbstractStateDialog {
 
     @Override
     public Order getResult() {
-        // Builder exercise: fill the builder with getSelectedItem(), salt.isSelected(), bread.isSelected()
-        return new Order();
+        return new Order.Builder()
+                .withSoup(getSelectedItem())
+                .withBread(bread.isSelected())
+                .withSalt(salt.isSelected())
+                .build();
     }
 
     @Override
