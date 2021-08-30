@@ -1,10 +1,10 @@
 package com.umlaut.patterntraining.state;
 
-import com.umlaut.patterntraining.dialogresult.EatMore;
-import com.umlaut.patterntraining.dialogresult.Order;
 import com.umlaut.patterntraining.bill.IBill;
 import com.umlaut.patterntraining.bill.SoupBill;
 import com.umlaut.patterntraining.dialog.RestaurantDialog;
+import com.umlaut.patterntraining.dialogresult.EatMore;
+import com.umlaut.patterntraining.dialogresult.Order;
 
 import java.beans.PropertyChangeEvent;
 
@@ -19,7 +19,9 @@ public class RestaurantState {
         this.dialog = dialog;
         dialog.showOrderDialog();
         state = StateName.ORDER;
-        // Observer exercise: register the goOn method as PropertyChangeListener for the subdialogs
+        dialog.getOrderDialog().addResultListener(this::goOn);
+        dialog.getEatDialog().addResultListener(this::goOn);
+        dialog.getPayDialog().addResultListener(this::goOn);
     }
 
     public void goOn(PropertyChangeEvent evt) {

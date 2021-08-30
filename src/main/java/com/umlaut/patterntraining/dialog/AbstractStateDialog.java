@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public abstract class AbstractStateDialog extends JPanel {
-    // Observer exercise: use PropertyChangeSupport to register PropertyChangeListener
+    // we could also use the PropertyChangeSupport from JPanel
+    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
     public void initDialog() {
         setBackground(Color.white);
@@ -30,7 +32,7 @@ public abstract class AbstractStateDialog extends JPanel {
     }
 
     public void addResultListener(PropertyChangeListener listener) {
-        // Observer exercise: add the listener to the support
+        propertyChangeSupport.addPropertyChangeListener("result", listener);
     }
 
     private JButton createGoOnButton() {
@@ -49,6 +51,6 @@ public abstract class AbstractStateDialog extends JPanel {
     protected abstract ImageIcon getSymbolImage();
 
     private void onGoOnButtonClick(ActionEvent e) {
-        // Observer exercise: call fire method of property change support
+        propertyChangeSupport.firePropertyChange("result", null, getResult());
     }
 }
