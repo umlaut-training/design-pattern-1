@@ -1,7 +1,9 @@
 package com.umlaut.patterntraining.state;
 
+import com.umlaut.patterntraining.bill.AdditionalSoupBillDecorator;
+import com.umlaut.patterntraining.bill.BreadBillDecorator;
 import com.umlaut.patterntraining.bill.IBill;
-import com.umlaut.patterntraining.bill.SoupBill;
+import com.umlaut.patterntraining.bill.SaltBillDecorator;
 import com.umlaut.patterntraining.dialog.RestaurantDialog;
 import com.umlaut.patterntraining.dialogresult.EatMore;
 import com.umlaut.patterntraining.dialogresult.Order;
@@ -27,8 +29,7 @@ public class RestaurantState {
     public void goOn(PropertyChangeEvent evt) {
         if (state == StateName.ORDER) {
             Order order = (Order) evt.getNewValue();
-            // Decorator exercise: calculate correct bill with decorator
-            bill = new SoupBill(order.getSoup());
+            bill = decorateBill(bill, order);
             dialog.showEatDialog();
             state = StateName.EAT;
         } else if (state == StateName.EAT) {
@@ -44,6 +45,17 @@ public class RestaurantState {
         } else if (state == StateName.PAY) {
             System.exit(0);
         }
+    }
+
+    private IBill decorateBill(IBill bill, Order order) {
+        bill = new AdditionalSoupBillDecorator(bill, order.getSoup());
+        if (order.isWithBread()) {
+            bill = new BreadBillDecorator(bill);
+        }
+        if (order.isWithSalt()) {
+            bill = new SaltBillDecorator(bill);
+        }
+        return bill;
     }
 }
 

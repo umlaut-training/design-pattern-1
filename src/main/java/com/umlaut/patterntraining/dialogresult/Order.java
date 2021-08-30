@@ -1,6 +1,5 @@
 package com.umlaut.patterntraining.dialogresult;
 
-import com.umlaut.patterntraining.restaurantmenu.RestaurantMenu;
 import com.umlaut.patterntraining.restaurantmenu.legacy.MenuItem;
 
 public class Order {
