@@ -1,15 +1,15 @@
 package com.umlaut.patterntraining;
 
-import com.umlaut.patterntraining.restaurant.UmlautRestaurant;
+import com.umlaut.patterntraining.restaurant.AbstractRestaurant;
+import com.umlaut.patterntraining.restaurant.AbstractRestaurantFactory;
 
 public class RestaurantMain {
     public static void main(String[] args) {
-        // Factory exercise: use Factory to create the restaurant depending on args
-        UmlautRestaurant umlautRestaurant = new UmlautRestaurant();
-        // Factory exercise: init shall be called in the general factory
-        umlautRestaurant.initCommon();
-        // Factory exercise: this shall be called in the type specific factory
-        umlautRestaurant.initUmlautSpecial();
-        umlautRestaurant.enterRestaurant();
+        AbstractRestaurant restaurant = AbstractRestaurantFactory.createRestaurant(parseInput(args));
+        restaurant.enterRestaurant();
+    }
+
+    private static String parseInput(String[] args) {
+        return args.length > 0 ? args[0] : "unknown";
     }
 }

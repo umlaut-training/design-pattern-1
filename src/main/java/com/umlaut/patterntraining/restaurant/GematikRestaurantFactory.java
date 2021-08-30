@@ -1,5 +1,10 @@
 package com.umlaut.patterntraining.restaurant;
 
 public class GematikRestaurantFactory extends AbstractRestaurantFactory {
-    // Factory exercise: implement
+    @Override
+    protected AbstractRestaurant factoryMethod() {
+        GematikRestaurant restaurant = new GematikRestaurant();
+        restaurant.initGematikSpecial();
+        return restaurant;
+    }
 }

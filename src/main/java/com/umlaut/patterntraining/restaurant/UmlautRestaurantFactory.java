@@ -1,5 +1,10 @@
 package com.umlaut.patterntraining.restaurant;
 
 public class UmlautRestaurantFactory extends AbstractRestaurantFactory {
-// Factory exercise: implement
+    @Override
+    protected AbstractRestaurant factoryMethod() {
+        UmlautRestaurant restaurant = new UmlautRestaurant();
+        restaurant.initUmlautSpecial();
+        return restaurant;
+    }
 }

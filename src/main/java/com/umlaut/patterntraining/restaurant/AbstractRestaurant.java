@@ -1,7 +1,6 @@
 package com.umlaut.patterntraining.restaurant;
 
 import com.umlaut.patterntraining.dialog.RestaurantDialog;
-import com.umlaut.patterntraining.resources.ImageResourceLoader;
 import com.umlaut.patterntraining.state.RestaurantState;
 
 import javax.swing.*;
