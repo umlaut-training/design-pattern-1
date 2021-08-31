@@ -1,11 +1,11 @@
 package com.umlaut.patterntraining;
 
 import com.umlaut.patterntraining.restaurant.AbstractRestaurant;
-import com.umlaut.patterntraining.restaurant.AbstractRestaurantFactory;
+import com.umlaut.patterntraining.restaurant.RestaurantFactory;
 
 public class RestaurantMain {
     public static void main(String[] args) {
-        AbstractRestaurant restaurant = AbstractRestaurantFactory.createRestaurant(parseInput(args));
+        AbstractRestaurant restaurant = new RestaurantFactory().createRestaurant(parseInput(args));
         restaurant.enterRestaurant();
     }
 
